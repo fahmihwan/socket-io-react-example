@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const socket = io.connect("http://localhost:3001");
 
 function App() {
+  
   //Room State
   const [room, setRoom] = useState("");
 
@@ -19,6 +20,7 @@ function App() {
   };
 
   const sendMessage = () => {
+    console.log(message);
     socket.emit("send_message", { message, room });
   };
 
@@ -26,7 +28,9 @@ function App() {
     socket.on("receive_message", (data) => {
       setMessageReceived(data.message);
     });
+    console.log(socket);
   }, [socket]);
+
   return (
     <div className="App">
       <input
